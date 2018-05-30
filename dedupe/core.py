@@ -348,16 +348,12 @@ def scoreGazette(records, data_model, classifier, num_cores=1, threshold=0):
         imap = functools.partial(pool.imap_unordered, chunksize=1)
 
     first, records = peek(records)
+    # When using with flask, the exception is caught by flask's catch all.
     if first is None:
-        raise ValueError("No records to match")
-
-    score_records = ScoreGazette(data_model, classifier, threshold)
-
-    if sys.version < '3':
+        records = []
+    else:
+        score_records = ScoreGazette(data_model, classifier, threshold)
         records = (list(y) for y in records)
-
-    for scored_pairs in imap(score_records, records):
-        yield scored_pairs
 
 
 def peek(records):
