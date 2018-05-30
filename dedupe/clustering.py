@@ -200,7 +200,9 @@ def greedyMatching(dupes, threshold=0.5):
 
 
 def gazetteMatching(scored_blocks, n_matches=1):
-
+    # Since an empty list can now be passed from score gazette, we need to handle that situation.
+    if scored_blocks is None:
+        raise StopIteration
     for block in scored_blocks:
         block.sort(order='score')
         block = block[::-1]
