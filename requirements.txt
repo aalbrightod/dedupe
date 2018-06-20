@@ -1,5 +1,5 @@
 pytest
 pytest-cov
-https://github.com/datamade/pytest-flake8/zipball/master
+git+http://github.com/datamade/pytest-flake8.git#egg=pytest-flake8
 cython
 mock
